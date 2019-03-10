@@ -27,7 +27,7 @@ GROUP BY party.country_id, floor_position;
 -- Inserting the data into the table.
 
 INSERT INTO q6
-SELECT inte_0.country_id  AS countryName,
+SELECT country.name AS countryName,
        inte_0.num_parties AS r0_2,
        inte_1.num_parties AS r2_4,
        inte_2.num_parties AS r4_6,
@@ -37,7 +37,8 @@ FROM interval_count AS inte_0,
      interval_count AS inte_1,
      interval_count AS inte_2,
      interval_count AS inte_3,
-     interval_count AS inte_4
+     interval_count AS inte_4,
+     country
 WHERE inte_0.country_id = inte_1.country_id
   AND inte_0.country_id = inte_2.country_id
   AND inte_0.country_id = inte_3.country_id
@@ -46,4 +47,5 @@ WHERE inte_0.country_id = inte_1.country_id
   AND inte_1.floor_position = 2
   AND inte_2.floor_position = 4
   AND inte_3.floor_position = 6
-  AND inte_4.floor_position = 8 OR inte_4.floor_position = 10;
+  AND inte_4.floor_position = 8
+  AND inte_0.country_id = country.id;
