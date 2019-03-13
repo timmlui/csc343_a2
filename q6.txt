@@ -1,5 +1,3 @@
-https://rextester.com/l/postgresql_online_compiler
-
 CREATE TABLE IF NOT EXISTS countries(
    id                  INTEGER  NOT NULL PRIMARY KEY 
   ,name                VARCHAR(14) NOT NULL
@@ -458,6 +456,145 @@ INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) V
 INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2644,1.2,1.4,3);
 
 
+-- A "cabinet" is the set of government and opposition parties in parliament
+-- as of each major change, such as an election or change of prime minister.  
+-- This table itself stores the start date of a cabinet and other general 
+-- information it.  Table cabinet_party, which references this table,
+-- stores the political parties that were part of this cabinet.
+CREATE TABLE cabinet(
+  id INT PRIMARY KEY,
+  -- The country in which this cabinet occurred.
+  country_id INT REFERENCES countries(id),
+  -- The date on which this cabinet came into being.
+  start_date DATE NOT NULL,
+  -- A label for this cabinet, consisting of the family name of the
+  -- prime minister and a roman numeral if he/she headed more than one
+  -- cabinet.
+  name VARCHAR(50) NOT NULL UNIQUE,
+  -- A wikepedia entry or other webpage about this cabinet.
+  wikipedia VARCHAR(500),
+  -- Further information about this cabinet.
+  description VARCHAR(1000),
+  -- Further information about this cabinet.
+  comment VARCHAR(1000),
+  -- The previous cabinet for this country.  This attribute forms a 
+  -- "linked list" of cabinets for each country.
+  -- Constraint: The country_id for this cabinet and the previous cabinet
+  -- must be the same.
+  previous_cabinet_id INT REFERENCES cabinet(id),
+  -- The ID of the parliamentary election associated this cabinet.
+  election_id INT 
+);
+
+-- A party that was part of parliament during the period of a cabinet.
+CREATE TABLE cabinet_party(
+  id INT PRIMARY KEY,
+  cabinet_id INT REFERENCES cabinet(id),
+  party_id INT REFERENCES party(id),
+  -- True iff this party fills the position of prime minister.
+  pm BOOLEAN NOT NULL,
+  -- Further information about this relationship between a party and cabinet.
+  description VARCHAR(1000)
+);
+
+-- A parliamentary election is an election within a country to choose
+-- a national government.  A European parliament election is an election,
+-- held across all European Union countries, to choose national 
+-- representatives for the European parliament.
+CREATE TYPE election_type AS ENUM(
+	'European Parliament', 'Parliamentary election');
+
+-- Election results for a parliamentary election or European parliament
+-- election.  European parliament elections are recorded here by country.
+CREATE TABLE election(
+  id INT primary key,
+  -- The country whose election information this is.
+  country_id INT REFERENCES countries(id),
+  -- The date of this election.
+  e_date DATE NOT NULL,
+  -- A wikipedia entry or other webpage about this election.
+  wikipedia VARCHAR(100),
+  -- The number of seats available in this election
+  seats_total INT NOT NULL,
+  -- The number of citizens eligible to vote in this election
+  electorate INT NOT NULL,
+  -- The number of people who did vote in this election.
+  votes_cast INT, 
+  -- The number of the votes cast that are valid.  A voter may "spoil"
+  -- their vote either intentionally (in protest) or unintentionally (by
+  -- filling it out incorrectly).  Only valid votes contribute to the
+  -- election results.
+  -- Constraint: votes_valid <= votes_cast <= electorate
+  votes_valid INT,
+  -- Further information about this election
+  description VARCHAR(500),
+  -- ID of the previous parliamentary election in this country, or
+  -- NULL if there is no previous parliamentary election in the database.
+  -- Note: Even EP elections have this attribute.
+  -- Constraint: The country_id for this election and the previous 
+  -- parliamentary election must be the same.
+  previous_parliament_election_id INT REFERENCES election(id),
+  -- ID of the previous EP election in this country, or
+  -- NULL if there is no previous EP election in the database.
+  -- Note: Even parliamentary elections have this attribute.
+  -- Constraint: The country_id for this election and the previous
+  -- EP election must be the same.
+  previous_ep_election_id INT REFERENCES election(id),
+  -- The type of election this was.
+  e_type election_type NOT NULL 
+);
+
+
+-- Results, for each party, of a parliamentary election.
+CREATE TABLE election_result(
+  id INT PRIMARY KEY,
+  -- The election that these results are for.
+  election_id INT REFERENCES election(id),
+  -- The party whose results these are.
+  party_id INT REFERENCES party(id),
+  -- If this party belongs to an alliance for this election, this is
+  -- the ID of the election result associated with the head party
+  -- in the alliance.  (All alliances have a head party.) 
+  alliance_id INT REFERENCES election_result(id),
+  -- Number of seats the party won.
+  seats INT,
+  -- Number of valid votes that went to this party in this election.
+  votes INT,
+  -- Further information about this election result.
+  description VARCHAR(1000),
+  UNIQUE (election_id, party_id)
+);
+
+-- Classification of political parties into families, such as "populist",
+-- "conservative", or "religious".
+CREATE TABLE party_family(
+  party_id INT REFERENCES party(id),
+  family VARCHAR(50) NOT NULL, 
+  PRIMARY KEY(party_id, family)
+);
+
+-- For countries that have a president in addition to a prime minister,
+-- this table records its presidents.
+CREATE TABLE politician_president(
+  id INT PRIMARY KEY,
+  -- The country for whom this was a president.
+  country_id INT REFERENCES countries(id),
+  -- The start date of this presidency.
+  start_date DATE NOT NULL,
+  -- The end date of this presidency.
+  end_date DATE,
+  -- The party to which this president belonged.
+  party_id INT REFERENCES party(id),
+  -- Further information about this president.
+  description VARCHAR(1000) NOT NULL,
+  -- Further information about this president.
+  comment VARCHAR(1000) NOT NULL
+  -- Constraint: For any one country, there can be no overlap between
+  -- presidency periods (the time from its start to its end date).
+  -- There can be gaps.
+);
+
+---- Q6
 
 DROP TABLE IF EXISTS q6 CASCADE;
 CREATE TABLE q6
@@ -510,5 +647,129 @@ WHERE inte_0.country_id = inte_1.country_id
   AND inte_0.country_id = countries.id;
 
 
+---- Q4
 
-select * from q6
+--Step 1: Get parties for each country
+CREATE VIEW CountryParties AS
+SELECT country_id, name_short, id AS party_id
+FROM party;
+
+
+
+--Step 2: Get election data from each country
+CREATE VIEW CountryElectionData AS
+SELECT country_id, EXTRACT(YEAR from e_date) AS election_year, votes_valid, id AS election_id
+FROM election
+WHERE EXTRACT(YEAR from e_date) >= 1996 AND EXTRACT(YEAR from e_date) <= 2016;
+
+
+
+--Step 3: Join the previous views into one view
+CREATE VIEW ElectionData AS
+SELECT *
+FROM CountryParties NATURAL JOIN CountryElectionData;
+
+
+
+--Step 4: Get election results for each party
+CREATE VIEW ElectionResults AS
+SELECT election_id, party_id, votes
+FROM election_result
+WHERE votes > 0;
+
+
+--Step 5: Natural join the previous views into one view
+CREATE VIEW PartyElectionData AS
+SELECT *
+FROM ElectionResults NATURAL JOIN ElectionData;
+
+
+
+--Step 6: Calculate the percentage of valid votes each party received
+CREATE VIEW PartyVotePercentage AS
+SELECT country_id, party_id, election_id, name_short, election_year, 
+		(CAST (votes AS float) / CAST (votes_valid AS float) * 100) AS vote_percentage
+FROM PartyElectionData
+WHERE votes_valid >0; --Extra check to ensure no division by zero
+
+
+
+--Step 7: Find the average votes percentage if there was more than one election in one year
+CREATE VIEW VotePercentageAverage AS
+SELECT election_year, country_id, AVG(vote_percentage) AS vote_percentage, name_short AS partyName
+FROM PartyVotePercentage
+GROUP BY (country_id, party_id, election_year, partyName);
+
+
+
+--Step 8: Get country name and country ID
+CREATE VIEW CountryNameID AS
+SELECT id AS country_id, name AS countryName
+FROM Countries;
+
+
+
+--Step 9: Replace country ID with country name in VotePercentageAverage
+CREATE VIEW VotePercentageAverageCountry AS
+SELECT election_year AS year, countryName, vote_percentage, partyName
+FROM VotePercentageAverage NATURAL JOIN CountryNameID;
+
+--Step 10: Place the vote percentage into one of the vote ranges
+
+	
+DROP TABLE IF EXISTS q4 CASCADE;
+CREATE TABLE q4
+(
+  year        INT,
+  countryName VARCHAR(50),
+  voteRange   VARCHAR(50),
+  partyName   VARCHAR(50)
+);
+
+
+
+INSERT INTO q4
+SELECT vpac.year,
+       vpac.countryName,
+       CASE when 0 < vpac.vote_percentage and vpac.vote_percentage <= 5 THEN '(0-5]'
+            when 5 < vpac.vote_percentage and vpac.vote_percentage <= 10 THEN '(5-10]'
+            when 10 < vpac.vote_percentage and vpac.vote_percentage <= 20 THEN '(10-20]'
+            when 20 < vpac.vote_percentage and vpac.vote_percentage <= 30 THEN '(20-30]'
+            when 30 < vpac.vote_percentage and vpac.vote_percentage <= 40 THEN '(30-40]'
+            when 40 < vpac.vote_percentage and vpac.vote_percentage <= 100 THEN '(40-100]'
+       END AS voteRange,
+       vpac.partyName
+FROM VotePercentageAverageCountry as vpac;
+
+                                    
+------ Q5
+
+--Step 1: Get country data
+--CREATE VIEW countryData AS
+--SELECT id AS country_id, name AS countryName
+--FROM Country;
+
+
+--Step 2: Calculate the participation ratio per country per year
+--If more than one election per country per year, average is reported
+CREATE VIEW countryParticipationRatio AS
+SELECT c.countryName, EXTRACT (YEAR from e.e_date) AS year, 
+	   (AVG (CAST(e.votes_cast AS float) / CAST(e.electorate AS float) * 100)) AS participationRatio
+FROM countries c INNER JOIN election e ON c.id = e.country_id
+GROUP BY (e.country_id, EXTRACT(YEAR from e.e_date))
+WHERE EXTRACT(YEAR from e.e_date) >= 2001 AND EXTRACT(YEAR from e.e_date) <= 2016;
+
+
+
+DROP TABLE IF EXISTS q5 CASCADE;
+CREATE TABLE q5
+(
+  countryName VARCHAR(50),
+  year   INT,
+  participationRatio   INT
+);
+
+
+
+select * from q5
+

@@ -10,7 +10,7 @@ FROM Country;
 --If more than one election per country per year, average is reported
 CREATE VIEW countryParticipationRate AS
 SELECT countryName, EXTRACT (YEAR from e_date) AS "year", 
-	   (AVG (CAST(votes_cast AS float) / CAST(electorate AS float))) AS "participationRate"
+	   (AVG (CAST(votes_cast AS float) / CAST(electorate AS float))) AS participationRatio
 FROM countryData NATURAL JOIN election
 GROUP BY (country_id, year)
 WHERE year >= 2001 AND year <= 2016;
