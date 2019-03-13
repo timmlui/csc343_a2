@@ -1,0 +1,514 @@
+https://rextester.com/l/postgresql_online_compiler
+
+CREATE TABLE IF NOT EXISTS countries(
+   id                  INTEGER  NOT NULL PRIMARY KEY 
+  ,name                VARCHAR(14) NOT NULL
+  ,name_short          VARCHAR(3) NOT NULL
+  ,oecd_accession_date DATE  NOT NULL
+);
+INSERT INTO countries(id,name,name_short,oecd_accession_date) VALUES (5,'Japan','JPN','1964-04-28');
+INSERT INTO countries(id,name,name_short,oecd_accession_date) VALUES (29,'Canada','CAN','1961-04-10');
+INSERT INTO countries(id,name,name_short,oecd_accession_date) VALUES (43,'France','FRA','1961-08-07');
+INSERT INTO countries(id,name,name_short,oecd_accession_date) VALUES (44,'United Kingdom','GBR','1961-05-02');
+INSERT INTO countries(id,name,name_short,oecd_accession_date) VALUES (54,'Germany','DEU','1961-09-27');
+
+CREATE TABLE IF NOT EXISTS party(
+   id          INTEGER  NOT NULL PRIMARY KEY 
+  ,country_id  INTEGER  NOT NULL
+  ,name_short  VARCHAR(8) NOT NULL
+  ,name        VARCHAR(60) NOT NULL
+  ,description VARCHAR(439)
+);
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (4,5,'PNP','People''s New Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (41,54,'FW','Free Voters','New party formed on 24 January 2009.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (59,43,'IR|DL','Independent Republicans | Liberal Democracy','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (86,5,'SDF','Socialist Democratic Federation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (137,54,'DZ','Centre Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (138,43,'RPR','Rally for the Republic','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (163,5,'DRP','Democratic Reform Party','New party formed in 1989.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (170,5,'NLC','New Liberal Club','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (177,43,'gauche','other left','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (187,54,'DRP','German Reich Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (213,43,'MR','Reformers Movement','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (238,54,'GVP','All-German People''s Party','Party was formed on 29 November 1952. Among the founding members were Gustav Heinemann, a former CDU minister of the interior, and Helene Wessel, leader of the Zentrum.The party was dissolved at a party congress on 18/19 May 1957 and joining the SPD was recommended (Stöss 1968, 1478ff).');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (247,5,'NPD','New Party Daichi','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (255,54,'B90/Gr','Alliance 90 / Greens -- Citizens'' Movement','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (259,43,'CPNT','Hunting, Fishing, Nature, Tradition','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (270,43,'FN','National Front','New party formed on 5 October 1972.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (285,43,'droite','other right','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (292,54,'Grau','The Grays -- Gray Panthers','New party formed on 12 July 1989.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (296,29,'CCF|NDP','Co-operative Commonwealth Federation | New Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (301,54,'Tier','Animal Protection Party','New party formed on 13 Februar 1993.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (311,44,'Plaid','Plaid Cymru','New party formed on 5 August 1925.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (319,44,'DUP','Democratic Unionist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (332,44,'N','Nationalist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (349,44,'U','Unity','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (358,54,'FVP','Free People''s Party','Free People''s Party (FVP) parliamentary group formed on  23 February 1956 as a split-off from the Free Democratic (FDP) and included four cabinet members.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (368,29,'LP','Liberal Party of Canada','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (401,43,'PR','Radical Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (439,5,'DPJ','Democratic Party of Japan','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (442,43,'LCR','Revolutionary Communist League','New party formed in 1974.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (448,29,'BQ','Quebec Bloc','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (453,44,'etc','others','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (462,5,'LP','Liberal Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (467,44,'GP','Green Party','New party formed in 1973.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (509,43,'UDF|MD','Union for French Democracy | Democratic Movement','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (516,43,'PSU','Unified Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (524,54,'Rep','The Republicans','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (543,54,'FDP','Free Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (547,5,'JRP','Japan Renewal Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (556,29,'CP|LPP','Communist (Labour-Progressive) Party','Party formed on 29 May 1921.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (558,54,'SPD','Social Democratic Party of Germany','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (610,54,'none','no party affiliation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (633,54,'DFU','German Peace Union','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (639,44,'Nat','Nationals','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (646,44,'VUPP','Vanguard Unionist Progressive Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (649,54,'KPD','Communist Party of Germany','Party was banned on 17 August 1956 and formed the German Communist Party (DKP) on 25 September 1968.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (650,43,'GE','Ecology Generation','New party formed in 1990.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (658,43,'UMP|LR','Union for a Popular Movement | The Republicans','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (659,44,'Lib','Liberals','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (670,43,'PFN','Party of New Forces','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (677,29,'SCR','Social Credit Rally','Party formed on 1 September 1963.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (686,43,'PCF','French Communist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (689,44,'SF','Sinn Fein','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (695,5,'IC','Independent''s Club','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (772,54,'B90/Gru','Alliance 90 / Greens','Formed on 12/13 January 1980 at a party congress in Karlsruhe (Stöss 1986, 1581).Merged with Alliance 90 / Greens -- Citizens'' Movement (B90/Gr) from East Germany on 14 May 1993.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (773,44,'Con','Conservatives','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (791,54,'Li/PDS','The Left / PDS','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (794,29,'PCP','Progressive Conservative Party of Canada','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (796,54,'WASG','Labour and Social Justice -- The Electoral Alternative','Labour and Social Justice – The Electoral Alternative (WASG) was formed on 22 January 2005 by former Social Democrats (SPD) and union members. WASG candidates won seats on PDS lists in the 2005 election and formed a joint parliamentary group.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (808,54,'CDU','Christian Democratic Union','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (824,43,'todo','to be coded','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (837,5,'K','Komeito Party','New party formed in 1964. Party was officially dissolved on 5 November 1994 but reformed on 7 November 1998.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (865,54,'Pi','German Pirate Party','New party formed 10 September 2006.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (873,43,'V','Greens','New party formed on 20 January 1984.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (885,43,'CDP','Centre Democracy and Progress','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (890,43,'RGR','Rally of Republican Lefts','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (897,29,'RPC','Reform Party of Canada','New party formed on 31 October 1987.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (898,43,'UDCA','Union for the Defence of Traders and Artisans -- Poujadists','New party formed in 1950s.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (905,5,'none','no party affiliation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (912,54,'DP','German Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (940,5,'JSP','Japan Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (947,43,'none','no party affiliation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1017,44,'NLP','National Liberal Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1023,44,'SDLP','Social Democratic and Labour Party','Party formed on 20 August 1970.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1053,5,'DSP','Democratic Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1055,5,'etc','others','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1057,44,'R','Respect -- The Unity Coalition','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1058,43,'NC','New Centre','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1086,43,'MRP','Popular Republican Movement','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1092,44,'RepLP','Republican Labour Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1094,43,'G','Gaullists','New party formed on 14 April 1947.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1101,43,'MF','Movement for France','New party formed on 20 November 1994.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1124,5,'YP','Your Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1126,44,'NF','National Front','Party formed in 1967.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1131,54,'BP','Bavarian Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1136,5,'NFP','New Frontier Party','New Frontier Party (NFP) split into six parties following its dissolution on 27 December 1997 (AFP).');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1146,5,'NPS','New Party Sakigake','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1165,5,'LL','Liberal League','New party formed in 1994.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1175,5,'NPN','New Party Nippon','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1176,43,'LO','Workers'' Struggle','Party formed in 1956.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1180,54,'CSU','Christian Social Union','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1189,29,'none','no party affiliation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1193,5,'LDP','Liberal Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1205,44,'ILP','Independent Labour Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1210,44,'UUP','Ulster Unionist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1235,54,'Fam','Family Party of Germany','New party formed on 17 October 1981.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1250,44,'BNP','British National Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1255,29,'CPC','Conservative Party of Canada','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1259,29,'GPC','Green Party of Canada','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1263,43,'MNR','National Republican Movement','New party formed on 2 October 1999.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1272,44,'UKIP','United Kingdom Independence Party','New party formed on 3 September 1993.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1276,44,'CPGB','Communist Party of Great Britain','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1284,44,'SNP','Scottish National Party','Party formed in 1934.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1297,43,'PRL','Conservatives','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1307,29,'BPC','Bloc Populaire Canadien','New party formed on 8 September 1942.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1327,5,'JNP','Japan New Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1328,43,'etc','others','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1363,44,'UUUC','United Ulster Unionist Coalition','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1382,5,'NCP','New Conservative Party','Formed by members of the Liberal Party (LP) on 3 April 2000 and joined the Liberal Democratic Party (LDP) on 17 November 2003.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1392,29,'SSC','Social Credit Party of Canada','Party formed in 1935.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1414,43,'CNIP','National Centre of Independents and Peasants [Conservatives]','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1420,54,'WAV','Economic Reconstruction League','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1491,43,'CD','Democratic Centre','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1492,43,'PRG','Radical Party of the Left','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1496,44,'CNL','Conservatives and National Liberals','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1506,54,'DVU','German People''s Union','Party was formed on 16 January 1971 as a registered association and formally founded as a party on 5 March 1987.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1507,54,'GB/BHE','All-German Bloc / League of Expellees and Deprived of Rights','New party formed on 8 January 1950.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1537,54,'NPD','National Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1539,43,'PS','Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1540,5,'JCP','Japan Communist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1547,44,'SDP','Social Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1556,44,'Lab','Labour','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1566,44,'UPUP','Ulster Popular Unionist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1599,44,'none','no party affiliation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1701,54,'GDP','All-German Party','Merger of GB/BHE and DP that formed on 15/16 April 1961 but dissolved quickly after an unsuccessful 1961 election campaign.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1718,54,'Fr','Peace alliance','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1720,54,'BFB','Confederation of free citizens -- Offensive for Germany','Party formed on 21 January 1994.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1722,5,'JDP','Japan Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1723,5,'LWSP','Left Wing Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1724,5,'RWSP','Right Wing Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1726,5,'JLP','Japan Liberal Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1727,54,'CDU+CSU','Christian Democratic Union / Christian Social Union','Electoral alliance and joint parliamentary group (''Fraktionsgemeinschaft''). The parties run independently in elections but do not compete at the state level. The CSU runs only in Bavaria and the CDU in all other German states.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1733,5,'NCoP','National Cooperative Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1734,5,'DP','Democratic Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1736,5,'LFP','Labour Farmer Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1737,5,'SRP','Social Reform Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1738,5,'CoP','Cooperative Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1755,5,'LP(H)','Liberal Party (Hatoyama)','Liberal Party (Nihon Jiyūtō) was formed on 15 March 1953 by Ichirō Hatoyama.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (1812,5,'vac','vacancy','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2011,29,'L-P','Liberal-Progressive','New party formed in 1925.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2034,54,'no-seat','no seat','Largest party that won no seats in an election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2061,44,'EuCon','Pro-Euro Conservative Party','The party was registered on 10 March 1999 by two MEPs (Brendan Donnelly and John Stevens) that were formerly members of the Conservatives.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2062,44,'ED','English Democrats','New party formed on 18 September 2002.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2063,44,'CP','The Christian Party -- Christian Peoples Alliance in England','Party formed in 1999.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2064,44,'SLP','Socialist Labour Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2067,29,'no-seat','no seat','Largest party that won no seats in an election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2068,5,'PR','Peace and Reform','Peace and Reform (HK) parliamentary group was announced on 5 January 1998. It was formed by New Peace Party (Shinto Heiwa) and Reform Club (Kaikaku), two splinter parties from the New Frontier Party (NFP) breakup.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2069,5,'PLFP','People''s Life First Party','Several MPs followed Ichiro Ozawa and left the Democratic Party of Japan (DPJ) on 2 July 2012 to form Putting People''s Lives First (PPLF) on 12 July. Party split on 27 December 2012 into People''s Life Party (Seikatsu no Tō · 生活の党) and Tomorrow Party of Japan (Nippon Mirai no Tō · 日本未来の党).');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2077,43,'MIM','Martinican Independence Movement','New party formed on 1 July 1987.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2078,43,'AC','Centrist Alliance','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2079,43,'ex-dro','other far-right','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2080,43,'no-seat','no seat','Largest party that won no seats in an election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2083,43,'ex-gau','other far-left','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2085,29,'LL','Liberal-Labour','New party formed in 1898.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2103,44,'RP','Referendum Party','New party announced on 27 November 1994 by Sir James Goldsmith, a Euro-sceptic Anglo-French millionaire.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2562,44,'no-seat','no seat','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2136,5,'JReP','Japan Restoration Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2141,5,'no-seat','no seat','Largest party that won no seats in an election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2142,29,'NPC','National Party of Canada','New party formed in 1992.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2143,43,'MDC','Citizens'' Movement','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2147,44,'NO2EU','NO2EU -- Yes to Democracy','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2148,29,'PR','Rhinoceros Party','New party formed in 1963.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2162,29,'UE','Union of Electors','New party formed in 1939.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2249,43,'eco','other ecologists','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2250,43,'CeD','Centre Right','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2251,43,'CeG','Centre Left','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2252,43,'RPF','Rally for France','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2253,54,'AfD','Alternative for Germany','New party formed on 6 February 2013.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2260,43,'MP','Party of Presidential Majority','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2264,43,'RPR+UDF','RPR/UDF connected list','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2265,43,'CDS','Centre of Social Democrats','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2269,43,'UFD','Union of Democratic Forces','New party formed in 1958.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2271,43,'RCV','Radical-Socialist Party -- Citizens'' Movement -- Greens','Party formed in 1997.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2272,43,'GDR','Democratic and Republican Left','Parliamentary group formed in 2007.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2273,43,'UDI','Union of Democrats and Independents','Party formed on 18 September 2012.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2276,43,'RDA','African Democratic Rally','Party formed in 1946.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2277,43,'IOM','Overseas Independents','Parliamentary group formed in 1946.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2279,43,'TPA','Three Parties Alliance -- Third Force','Originally the Third Force was a coalition of the Communist Party (PCF), the Popular Republican Movement (MRP) and the Socialist Party (SFIO). In 1947 the Communist Party (PCF) left the coalition and the National Centre of Independents (CNIP), the Rally of Republican Lefts (RGR), the Radical Socialist Party (PRR/RS) and the Democratic and Socialist Union of the Resistance (UDSR) joined it instead. The coalition was renamed Third Force.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2280,43,'UDSR','Democratic and Socialist Union of the Resistance','New party formed in 1945.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2284,43,'U5R','Union for the fifth republic','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2289,54,'one-seat','one seat','Parties that won one seat in a single election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2296,44,'one-seat','one seat','Parties that won one seat in a single election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2297,5,'one-seat','one seat','Parties that won one seat in a single election and less than one percent vote share.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2358,43,'ARS','Republican and Social Action','Rally of the French People (RPF) MPs supported PM Pinay in a confidence vote on 6 March 1952 and formed a parliamentary group.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2387,44,'IE','An Independence from Europe','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2399,43,'DLR|DLF','Arise the Republic | France Arise','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2400,43,'AO','Alliance of the Overseas','New party formed in 2004.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2404,5,'PFG','Party for Future Generations','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2427,29,'L','Labour Party','New party formed in 1917.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2479,44,'NLO','National Labour Organisation','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2500,44,'CoCon','Coalition Conservative','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2501,44,'CoLib','Coalition Liberal','Party formed on 20 November 1918.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2503,44,'NDP','National Democratic and Labour Party','New party formed in 1918.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2504,44,'NP','National Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2508,44,'CoLab','Coalition Labour','Party formed in 1918.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2514,44,'C','Constitutionalist','Constitutionalist was no party, but a label used by politicians without party affiliation.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2517,44,'IL','Independent Liberal','Former MPs from the Liberal Party (L) running individually.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2518,44,'Na','National','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2565,29,'RP','Reconstruction Party of Canada','Reconstruction Party of Canada (RP) was founded by Henry Herbert Stevens, a former member of the Conservative Party of Canada (CPC). Reconstruction Party of Canada (RP) was dissolved when Henry Herbert Stevens rejoined the Conservative Party of Canada (CPC).');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2566,29,'PPC','Progressive Party of Canada','New party formed in 1914.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2577,29,'etc','others','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2581,43,'UR','Republican Union','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2583,43,'PDP','Popular Democratic Party','New party formed in 1924.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2584,43,'PUP','Proletarian Unity Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2585,43,'RI','Independent Radicals','New party formed in 1928.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2586,43,'RP','Progressive Republicans','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2587,43,'RepG','Left Republican','New party formed on 21 October 1901.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2589,43,'C','Conservatives','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2590,43,'SI','Independent Socialists','New party formed in 1880.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2592,43,'Rep','Republicans','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2593,43,'ALP','Liberal People''s Action','New party formed in 1901.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2594,43,'RS','Republican Socialist Party','New party formed on 10 July 1911.');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2617,43,'PSF','French Socialist Party','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2618,43,'PSdF','Socialist Party of France -- Jean Jaures Union','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2643,43,'REM','The Republic Onwards!','');
+INSERT INTO party(id,country_id,name_short,name,description) VALUES (2644,43,'FI','Unbowed France','');
+
+CREATE TABLE IF NOT EXISTS party_position(
+   party_id INTEGER  NOT NULL PRIMARY KEY 
+  ,left_right NUMERIC(6,4)
+  ,state_market NUMERIC(6,4)
+  ,liberty_authority NUMERIC(6,4)
+);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (4,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (41,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (59,7.0577,7.7993,6.1743);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (86,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (137,6.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (138,7.4997,6.5934,7.1854);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (163,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (170,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (177,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (187,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (213,5.8695,5.9852,5.4033);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (238,6.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (247,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (255,2.5,2.5,1.8);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (259,7.8,7.25,7.875);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (270,9.6854,7.4011,9.2889);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (285,7.6583,9,9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (292,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (296,2.46,1.9195,1.1134);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (301,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (311,3.1183,2.6251,3.7107);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (319,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (332,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (349,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (358,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (368,5.0552,5.3509,3.4615);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (401,3.9896,4.1676,4.2381);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (439,5.5717,5.06,4.1541);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (442,0.0714,0.2143,6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (448,3.0215,3.1207,2.2063);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (453,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (462,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (467,2.57,2.3775,2.0139);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (509,6.1017,6.2021,5.4999);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (516,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (524,9.2752,6.1901,9.3871);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (543,5.9233,8.2173,3.0695);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (547,8.2556,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (556,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (558,3.6451,3.8443,3.9791);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (610,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (633,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (639,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (646,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (649,0.957,0.3618,2.6754);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (650,3.6389,2.5,1.8);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (658,7.4997,6.5934,7.1854);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (659,4.2875,4.1064,2.6109);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (670,9.8,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (677,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (686,1.3741,1.056,4.5083);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (689,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (695,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (772,2.9308,4.3268,1.3251);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (773,7.4261,7.5725,7.1901);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (791,1.2152,1.0617,3.205);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (794,6.7112,6.9659,5.997);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (796,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (808,6.2503,6.3498,6.9333);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (824,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (837,5.6871,4.4549,6.25);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (865,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (873,3.155,2.8774,1.4772);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (885,5.8695,5.9852,5.4033);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (890,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (897,8.7748,8.7668,9.0688);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (898,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (905,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (912,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (940,2.6344,4.1367,3.121);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (947,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1017,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1023,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1053,6.1556,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1055,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1057,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1058,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1086,8.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1092,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1094,8.2,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1101,8.1721,7.5376,8.6774);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1124,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1126,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1131,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1136,8.2556,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1146,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1165,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1175,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1176,0,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1180,7.2871,6.5615,7.8675);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1189,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1193,8.0252,4.8094,7.7747);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1205,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1210,8.3,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1235,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1250,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1255,8.6608,8.7668,9.0688);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1259,1.9018,2.2467,2.0327);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1263,8.2786,8.5714,9.7143);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1272,7.8429,8.0938,7.8507);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1276,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1284,3.5871,3.0627,3.9623);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1297,7.5636,6.4495,7.2219);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1307,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1327,8.2556,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1328,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1363,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1382,8.2675,5.6522,8.032);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1392,7.8,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1414,7.5636,6.4495,7.2219);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1420,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1491,5.7216,5.9852,5.4033);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1492,4.0813,4.1676,4.2381);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1496,7.8,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1506,9.7256,5.8616,9.6118);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1507,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1537,9.8246,4.2105,9.4219);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1539,3.2493,3.248,2.9367);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1540,1.148,4.072,4.032);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1547,4.6,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1556,4.3562,4.5741,4.2779);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1566,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1599,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1701,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1718,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1720,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1722,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1723,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1724,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1726,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1727,6.2503,6.3498,6.9333);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1733,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1734,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1736,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1737,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1738,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1755,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (1812,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2011,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2034,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2061,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2062,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2063,6.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2064,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2067,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2068,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2069,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2077,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2078,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2079,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2080,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2083,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2085,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (23,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2136,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2141,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2142,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2143,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2147,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2148,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2162,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2249,2.5,2.5,1.8);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2250,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2251,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2252,7.4,6.7849,8.5048);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2253,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2260,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2264,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2265,6.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2269,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2271,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2272,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2273,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2276,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2277,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2279,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2280,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2284,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2289,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2296,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2297,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2358,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2387,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2399,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2400,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2404,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2427,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2479,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2500,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2501,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2503,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2504,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2508,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2514,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2517,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2518,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2562,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2565,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2566,5.3,4.9,6.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2577,0,0,0);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2581,8.7,5.9,8.6);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2583,6.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2584,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2585,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2586,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2587,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2589,7.4,6.4,6.9);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2590,1.2,1.4,3);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2592,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2593,6.2,5.7,7.2);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2594,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2617,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2618,3.3,3.5,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2643,6,6.7,3.5);
+INSERT INTO party_position(party_id,left_right,state_market,liberty_authority) VALUES (2644,1.2,1.4,3);
+
+
+
+DROP TABLE IF EXISTS q6 CASCADE;
+CREATE TABLE q6
+(
+  countryName VARCHAR(50),
+  r0_2        INT,
+  r2_4        INT,
+  r4_6        INT,
+  r6_8        INT,
+  r8_10       INT
+);
+
+
+-- The number of parties in each country within each of the intervals.
+
+CREATE VIEW interval_count AS
+SELECT party.country_id,
+       floor(party_position.left_right / 2) * 2 AS floor_position,
+       Count(*)                                 AS num_parties
+FROM party,
+     party_position
+WHERE party.id = party_position.party_id
+GROUP BY party.country_id, floor_position;
+
+
+-- Inserting the data into the table.
+
+INSERT INTO q6
+SELECT countries.name  AS countryName,
+       inte_0.num_parties AS r0_2,
+       inte_1.num_parties AS r2_4,
+       inte_2.num_parties AS r4_6,
+       inte_3.num_parties AS r6_8,
+       inte_4.num_parties AS r8_10
+FROM interval_count AS inte_0,
+     interval_count AS inte_1,
+     interval_count AS inte_2,
+     interval_count AS inte_3,
+     interval_count AS inte_4,
+     countries
+WHERE inte_0.country_id = inte_1.country_id
+  AND inte_0.country_id = inte_2.country_id
+  AND inte_0.country_id = inte_3.country_id
+  AND inte_0.country_id = inte_4.country_id
+  AND inte_0.floor_position = 0
+  AND inte_1.floor_position = 2
+  AND inte_2.floor_position = 4
+  AND inte_3.floor_position = 6
+  AND inte_4.floor_position = 8
+  AND inte_0.country_id = countries.id;
+
+
+
+select * from q6
