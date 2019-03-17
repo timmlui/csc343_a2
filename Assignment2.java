@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 // If you are looking for Java data structures, these are highly useful.
@@ -10,8 +11,6 @@ import java.util.List;
 //import java.util.Set;
 //import java.util.HashSet;
 public class Assignment2 extends JDBCSubmission {
-
-    public Connection connection;
 
     public Assignment2() throws ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
@@ -79,11 +78,10 @@ public class Assignment2 extends JDBCSubmission {
                 int cabinet_id = res.getInt("cab_id");
                 cabinets.add(cabinet_id);
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
             res.close();
             stmt.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return new ElectionCabinetResult(elections, cabinets);
     }
@@ -131,13 +129,12 @@ public class Assignment2 extends JDBCSubmission {
                     result.add(id);
                 }
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
             res.close();
             stmt.close();
             res2.close();
             stmt2.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return result;
     }
